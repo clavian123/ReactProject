@@ -8,6 +8,7 @@ import SafeAreaView from 'react-native-safe-area-view'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Index from './app/index'
 import Verification from './app/verification'
+import PinRegistration from './app/pinRegistration'
 
 
 const instructions = Platform.select({
@@ -44,6 +45,7 @@ export default class App extends Component {
           <Stack.Navigator>
             <Stack.Screen name="Index" component={Index} options={{headerShown: false}}/>
             <Stack.Screen name="Verification" component={Verification} options={{headerShown: false}}/>
+            <Stack.Screen name="PinRegistration" component={PinRegistration} options={{headerShown: false}}/>
           </Stack.Navigator>
         </NavigationContainer>    
       </SafeAreaProvider>

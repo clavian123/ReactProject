@@ -4,24 +4,16 @@ import { TapGestureHandler, State } from 'react-native-gesture-handler';
 import SafeAreaView from 'react-native-safe-area-view'
 
 
-
-class Verification extends Component {
-    constructor() {
-        super()
-        this.submit = () => {
-            const { navigate } = this.props.navigation;
-            navigate('PinRegistration')
-        }
-    }
+class PinRegistration extends Component {
     render() {
         return (
-            <SafeAreaView style={{ flex: 1 }}>
+            <SafeAreaView style={{ flex: 1}}>
                 <KeyboardAvoidingView behavior="padding">
                     <View style={styles.headerContainer}>
-                        <Text style={styles.header}>Please Check Your Email and Input the Code We've Sent</Text>
+                        <Text style={styles.header}>Please Input Your PIN Number</Text>
                     </View>
                     <TextInput style={styles.input} keyboardType='numeric' maxLength={6}/>
-                    <TapGestureHandler onHandlerStateChange={this.submit}>
+                    <TapGestureHandler>
                         <View style={{ ...styles.button, elevation: 2, marginTop: 150 }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>SUBMIT</Text>
                         </View>
@@ -31,7 +23,7 @@ class Verification extends Component {
         )
     }
 }
-export default Verification
+export default PinRegistration
 
 const styles= StyleSheet.create({
     headerContainer:{
@@ -42,7 +34,7 @@ const styles= StyleSheet.create({
     },
 
     header:{
-        fontSize:25,
+        fontSize:30,
         textAlign:'center',
         fontWeight: 'bold',
         color: 'black'
@@ -58,8 +50,8 @@ const styles= StyleSheet.create({
         marginVertical: 15,
         borderColor: 'rgba(0,0,0,0.2)',
         textAlign: 'center',
+        borderBottomWidth:2,
         borderBottomColor:'#b83b5e',
-        borderBottomWidth: 2
     },
 
     button: {

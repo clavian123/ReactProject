@@ -101,7 +101,7 @@ class Index extends Component {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }}>
-                <KeyboardAvoidingView style={styles.container} behavior="padding" keyboardVerticalOffset={height / 1.8}>
+                <KeyboardAvoidingView style={styles.container} behavior="padding" keyboardVerticalOffset={height / 1.565}>
                     <Animated.View style={{ ...StyleSheet.absoluteFill, transform: [{ translateY: this.bgY }] }}>
                         <View style={{ backgroundColor: '#f08a5d', flex: 1, height: null, width: null, justifyContent: 'center', alignItems: 'center', zIndex: 1 }}>
                             <Animated.View style={{ transform: [{ translateY: this.Y }] }}>
@@ -132,11 +132,11 @@ class Index extends Component {
                         </TapGestureHandler>
 
                         <Text style={{ fontSize: 30, marginTop: 50, textAlign: "center", fontWeight: 'bold', color: 'black' }}>Input Your Card Number</Text>
-                        <TextInput style={{ ...styles.input, marginTop: 50 }} placeholder="16 digits">
+                        <TextInput style={{ ...styles.input, marginTop: 50 }} placeholder="16 digits" maxLength={16} keyboardType='numeric'>
 
                         </TextInput>
                         <TapGestureHandler onHandlerStateChange={this.submit}>
-                            <Animated.View style={{ ...styles.button, elevation: 2, marginTop: 200 }}>
+                            <Animated.View style={{ ...styles.button, elevation: 2, marginTop: 150 }}>
                                 <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>SUBMIT</Text>
                             </Animated.View>
                         </TapGestureHandler>
@@ -188,8 +188,12 @@ const styles = StyleSheet.create({
     input: {
         fontSize: 20,
         height: 70,
-        borderRadius: 35,
-        borderWidth: 1,
+        borderRadius: 10,
+        // borderWidth: 5,
+        // borderColor:'#b83b5e',
+        // borderStartColor:'#b83b5e',
+        borderBottomColor:'#b83b5e',
+        borderBottomWidth:2,
         marginHorizontal: 20,
         paddingLeft: 10,
         marginVertical: 15,
