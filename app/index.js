@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Dimensions, TextInput, KeyboardAvoidingView } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import SafeAreaView from 'react-native-safe-area-view';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+
 
 const { width, height } = Dimensions.get("window")
 const { Value, event, block, cond, eq, set, Clock, startClock, stopClock, debug, timing, clockRunning, interpolate, Extrapolate, concat } = Animated
@@ -37,14 +40,15 @@ function runTiming(clock, value, dest) {
     ]);
 }
 
-
 class Index extends Component {
-
     constructor() {
         super()
-
         this.buttonOpacity = new Value(1)
         // this.Y = new Value(0)
+        this.submit = ()=>{
+            const { navigate } = this.props.navigation;
+            navigate('Verification')
+        }
 
         this.onStateChange = event([
             {
@@ -89,65 +93,60 @@ class Index extends Component {
 
         this.Y = interpolate(this.buttonOpacity, {
             inputRange: [0, 1],
-            outputRange: [400, 0],
+            outputRange: [height / 1.75, 0],
             extrapolate: Extrapolate.CLAMP
         });
     }
 
     render() {
         return (
-            <KeyboardAvoidingView style={styles.container} behavior="padding" keyboardVerticalOffset={380}>
-                <Animated.View style={{ ...StyleSheet.absoluteFill, transform: [{ translateY: this.bgY }] }}>
-                    <View style={{ backgroundColor: '#f08a5d', flex: 1, height: null, width: null, justifyContent: 'center', alignItems: 'center', zIndex: 1 }}>
-                        <Animated.View style={{ transform: [{ translateY: this.Y }] }}>
-                            <Text style={{ fontSize: 30, fontWeight: 'bold', color: 'white' }}>Let's get started!</Text>
-                        </Animated.View>
-                    </View>
+            <SafeAreaView style={{ flex: 1 }}>
+                <KeyboardAvoidingView style={styles.container} behavior="padding" keyboardVerticalOffset={height / 1.8}>
+                    <Animated.View style={{ ...StyleSheet.absoluteFill, transform: [{ translateY: this.bgY }] }}>
+                        <View style={{ backgroundColor: '#f08a5d', flex: 1, height: null, width: null, justifyContent: 'center', alignItems: 'center', zIndex: 1 }}>
+                            <Animated.View style={{ transform: [{ translateY: this.Y }] }}>
+                                <Text style={{ fontSize: 30, fontWeight: 'bold', color: 'white' }}>Let's get started!</Text>
+                            </Animated.View>
+                        </View>
 
-                    <View style={{ ...styles.buttonContainer }}>
-                        <TapGestureHandler onHandlerStateChange={this.onStateChange}>
-                            <Animated.View style={{ ...styles.button, opacity: this.buttonOpacity, transform: [{ translateY: this.buttonY }] }}>
-                                <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>REGISTER</Text>
+                        <View style={{ ...styles.buttonContainer }}>
+                            <TapGestureHandler onHandlerStateChange={this.onStateChange}>
+                                <Animated.View style={{ ...styles.button, opacity: this.buttonOpacity, transform: [{ translateY: this.buttonY }] }}>
+                                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>REGISTER</Text>
+                                </Animated.View>
+                            </TapGestureHandler>
+                        </View>
+                    </Animated.View>
+                    <Animated.View style={{
+                        opacity: this.inputOpacity,
+                        transform: [{ translateY: this.inputY }],
+                        height: height / 6 * 5,
+                        ...StyleSheet.absoluteFill,
+                        top: null,
+                        alignContent: 'center',
+                    }}>
+                        <TapGestureHandler onHandlerStateChange={this.onCloseState}>
+                            <Animated.View style={styles.closeButton}>
+                                <Animated.Text style={{ fontSize: 20 }}>X</Animated.Text>
                             </Animated.View>
                         </TapGestureHandler>
-                    </View>
-                </Animated.View>
-                <Animated.View style={{
-                    opacity: this.inputOpacity,
-                    transform: [{ translateY: this.inputY }],
-                    height: height / 6 * 5,
-                    ...StyleSheet.absoluteFill,
-                    top: null,
-                    alignContent: 'center',
-                    // justifyContent: 'center'
-                }}>
-                    <TapGestureHandler onHandlerStateChange={this.onCloseState}>
-                        <Animated.View style={styles.closeButton}>
-                            <Animated.Text style={{ fontSize: 20 }}>X</Animated.Text>
-                        </Animated.View>
-                    </TapGestureHandler>
 
-                    <Text style={{fontSize: 30, marginTop: 50, textAlign: "center", fontWeight: 'bold', color: 'black'}}>
-                        Input Your ATM Number
-                    </Text>
-                    <TextInput style={{ ...styles.input, marginTop: 50 }} placeholder="ex: 1234567890">
+                        <Text style={{ fontSize: 30, marginTop: 50, textAlign: "center", fontWeight: 'bold', color: 'black' }}>Input Your Card Number</Text>
+                        <TextInput style={{ ...styles.input, marginTop: 50 }} placeholder="16 digits">
 
-                    </TextInput>
-                    {/* <TextInput style={styles.input} placeholder="Email">
-
-                    </TextInput>
-                    <TextInput style={styles.input} placeholder="Phone Number">
-
-                    </TextInput> */}
-                    <Animated.View style={{ ...styles.button, elevation: 2, marginTop: 200 }}>
-                        <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
-                            SUBMIT
-                        </Text>
+                        </TextInput>
+                        <TapGestureHandler onHandlerStateChange={this.submit}>
+                            <Animated.View style={{ ...styles.button, elevation: 2, marginTop: 200 }}>
+                                <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>SUBMIT</Text>
+                            </Animated.View>
+                        </TapGestureHandler>
                     </Animated.View>
-                </Animated.View>
-            </KeyboardAvoidingView>
+                </KeyboardAvoidingView>
+            </SafeAreaView>
         );
     }
+
+
 }
 
 export default Index;
@@ -157,13 +156,11 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'flex-end',
-        // backgroundColor: 'red'
     },
 
     buttonContainer: {
         height: height / 3,
         backgroundColor: '#f08a5d',
-        // zIndex: 0
     },
 
     button: {
@@ -173,8 +170,6 @@ const styles = StyleSheet.create({
         borderRadius: 35,
         alignItems: 'center',
         justifyContent: 'center',
-
-
     },
 
     closeButton: {
@@ -193,7 +188,7 @@ const styles = StyleSheet.create({
     input: {
         fontSize: 20,
         height: 70,
-        borderRadius: 25,
+        borderRadius: 35,
         borderWidth: 1,
         marginHorizontal: 20,
         paddingLeft: 10,
