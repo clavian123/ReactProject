@@ -9,22 +9,22 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Index from './app/index'
 import Verification from './app/verification'
 import PinRegistration from './app/pinRegistration'
-
+import Login from './app/login'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android: 'Double tap R on your keyboard to reload,\n' + 'Shake or press menu button for dev menu',
 });
 
-function Login() {
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>asdasdasd</Text>
-      </View>
-    </SafeAreaView>
-  );
-}
+// function Login() {
+//   return (
+//     <SafeAreaView style={{ flex: 1 }}>
+//       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//         <Text>asdasdasd</Text>
+//       </View>
+//     </SafeAreaView>
+//   );
+// }
 
 function Home({navigation}) {
   return (
@@ -46,6 +46,7 @@ export default class App extends Component {
             <Stack.Screen name="Index" component={Index} options={{headerShown: false}}/>
             <Stack.Screen name="Verification" component={Verification} options={{headerShown: false}}/>
             <Stack.Screen name="PinRegistration" component={PinRegistration} options={{headerShown: false}}/>
+            <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
           </Stack.Navigator>
         </NavigationContainer>    
       </SafeAreaProvider>

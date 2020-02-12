@@ -5,6 +5,13 @@ import SafeAreaView from 'react-native-safe-area-view'
 
 
 class PinRegistration extends Component {
+    constructor(){
+        super();
+        this.submit = () =>{
+            const { navigate } = this.props.navigation;
+            navigate('Login');
+        }
+    }
     render() {
         return (
             <SafeAreaView style={{ flex: 1}}>
@@ -13,7 +20,7 @@ class PinRegistration extends Component {
                         <Text style={styles.header}>Please Input Your PIN Number</Text>
                     </View>
                     <TextInput style={styles.input} keyboardType='numeric' maxLength={6}/>
-                    <TapGestureHandler>
+                    <TapGestureHandler onHandlerStateChange={this.submit}>
                         <View style={{ ...styles.button, elevation: 2, marginTop: 150 }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>SUBMIT</Text>
                         </View>
