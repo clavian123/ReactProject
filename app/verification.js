@@ -20,7 +20,7 @@ class Verification extends Component {
                     <View style={styles.headerContainer}>
                         <Text style={styles.header}>Please Check Your Email and Input the Code We've Sent</Text>
                     </View>
-                    <TextInput style={styles.input} keyboardType='numeric' maxLength={6}/>
+                    <TextInput style={styles.input} keyboardType='numeric' maxLength={6} placeholder="Verification Code"/>
                     <TapGestureHandler onHandlerStateChange={this.submit}>
                         <View style={{ ...styles.button, elevation: 2, marginTop: 150 }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>SUBMIT</Text>

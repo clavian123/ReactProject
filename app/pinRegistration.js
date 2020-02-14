@@ -19,7 +19,7 @@ class PinRegistration extends Component {
                     <View style={styles.headerContainer}>
                         <Text style={styles.header}>Please Input Your PIN Number</Text>
                     </View>
-                    <TextInput style={styles.input} keyboardType='numeric' maxLength={6}/>
+                    <TextInput style={styles.input} keyboardType='numeric' maxLength={6} placeholder="PIN Number"/>
                     <TapGestureHandler onHandlerStateChange={this.submit}>
                         <View style={{ ...styles.button, elevation: 2, marginTop: 150 }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>SUBMIT</Text>
