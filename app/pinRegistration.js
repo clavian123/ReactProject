@@ -14,14 +14,14 @@ class PinRegistration extends Component {
     }
     render() {
         return (
-            <SafeAreaView style={{ flex: 1}}>
+            <SafeAreaView style={{ flex: 1, justifyContent: 'center'}}>
                 <KeyboardAvoidingView behavior="padding">
                     <View style={styles.headerContainer}>
                         <Text style={styles.header}>Please Input Your PIN Number</Text>
                     </View>
                     <TextInput style={styles.input} keyboardType='numeric' maxLength={6} placeholder="PIN Number"/>
                     <TapGestureHandler onHandlerStateChange={this.submit}>
-                        <View style={{ ...styles.button, elevation: 2, marginTop: 150 }}>
+                        <View style={{ ...styles.button}}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>SUBMIT</Text>
                         </View>
                     </TapGestureHandler>
@@ -35,7 +35,7 @@ export default PinRegistration
 const styles= StyleSheet.create({
     headerContainer:{
         // backgroundColor: 'red',
-        height: 200,
+        // height: 200,
         alignItems:'center',
         justifyContent: 'center',
     },
@@ -51,7 +51,6 @@ const styles= StyleSheet.create({
         fontSize: 20,
         height: 70,
         borderRadius: 10,
-        // borderWidth: 1,
         marginHorizontal: 20,
         paddingLeft: 10,
         marginVertical: 15,
@@ -62,6 +61,8 @@ const styles= StyleSheet.create({
     },
 
     button: {
+        marginTop: 30,
+        elevation:2,
         backgroundColor: '#b83b5e',
         height: 70,
         marginHorizontal: 20,

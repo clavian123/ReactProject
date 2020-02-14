@@ -15,14 +15,14 @@ class Verification extends Component {
     }
     render() {
         return (
-            <SafeAreaView style={{ flex: 1 }}>
+            <SafeAreaView style={{ flex: 1, justifyContent: 'center'}}>
                 <KeyboardAvoidingView behavior="padding">
                     <View style={styles.headerContainer}>
                         <Text style={styles.header}>Please Check Your Email and Input the Code We've Sent</Text>
                     </View>
                     <TextInput style={styles.input} keyboardType='numeric' maxLength={6} placeholder="Verification Code"/>
                     <TapGestureHandler onHandlerStateChange={this.submit}>
-                        <View style={{ ...styles.button, elevation: 2, marginTop: 150 }}>
+                        <View style={{ ...styles.button}}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>SUBMIT</Text>
                         </View>
                     </TapGestureHandler>
@@ -36,7 +36,7 @@ export default Verification
 const styles= StyleSheet.create({
     headerContainer:{
         // backgroundColor: 'red',
-        height: 200,
+        // height: 200,
         alignItems:'center',
         justifyContent: 'center',
     },
@@ -45,7 +45,8 @@ const styles= StyleSheet.create({
         fontSize:25,
         textAlign:'center',
         fontWeight: 'bold',
-        color: 'black'
+        color: 'black',
+        marginHorizontal: 10
     },
 
     input: {
@@ -69,6 +70,8 @@ const styles= StyleSheet.create({
         borderRadius: 35,
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop:30,
+        elevation:2,
     },
 
 

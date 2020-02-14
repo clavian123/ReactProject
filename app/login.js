@@ -19,7 +19,7 @@ class Login extends Component{
                         <TextInput style={styles.input} placeholder="Password" />
                     </View>
                     <TapGestureHandler>
-                        <View style={{ ...styles.buttonContainer, elevation: 2, marginTop: 85 }}>
+                        <View style={{ ...styles.buttonContainer}}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>SUBMIT</Text>
                         </View>
                     </TapGestureHandler>
@@ -32,12 +32,12 @@ class Login extends Component{
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        // justifyContent: 'center'
+        justifyContent: 'center'
     },
     titleContainer: {
-        // marginBottom: 20,
+        marginBottom: 20,
         // backgroundColor:'red',
-        height: 200,
+        // height: 200,
         alignItems:'center',
         justifyContent: 'center',
     },
@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     inputContainer: {
-        // height:70,
         marginVertical: 15,
         marginHorizontal: 30,
         borderBottomWidth: 2,
@@ -63,7 +62,9 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         borderRadius: 35,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        elevation: 2,
+        marginTop: 30,
     },
 });
 

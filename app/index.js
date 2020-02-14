@@ -136,7 +136,7 @@ class Index extends Component {
 
                         </TextInput>
                         <TapGestureHandler onHandlerStateChange={this.submit}>
-                            <Animated.View style={{ ...styles.button, elevation: 2, marginTop: 150 }}>
+                            <Animated.View style={{ ...styles.button, elevation: 2, marginTop: 30 }}>
                                 <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>SUBMIT</Text>
                             </Animated.View>
                         </TapGestureHandler>
@@ -189,9 +189,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         height: 70,
         borderRadius: 10,
-        // borderWidth: 5,
-        // borderColor:'#b83b5e',
-        // borderStartColor:'#b83b5e',
         borderBottomColor:'#b83b5e',
         borderBottomWidth:2,
         marginHorizontal: 20,
