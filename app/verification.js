@@ -35,8 +35,6 @@ export default Verification
 
 const styles= StyleSheet.create({
     headerContainer:{
-        // backgroundColor: 'red',
-        // height: 200,
         alignItems:'center',
         justifyContent: 'center',
     },
@@ -53,7 +51,6 @@ const styles= StyleSheet.create({
         fontSize: 20,
         height: 70,
         borderRadius: 10,
-        // borderWidth: 1,
         marginHorizontal: 20,
         paddingLeft: 10,
         marginVertical: 15,

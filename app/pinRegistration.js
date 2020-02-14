@@ -9,7 +9,7 @@ class PinRegistration extends Component {
         super();
         this.submit = () =>{
             const { navigate } = this.props.navigation;
-            navigate('Login');
+            navigate('Registration');
         }
     }
     render() {
@@ -34,8 +34,6 @@ export default PinRegistration
 
 const styles= StyleSheet.create({
     headerContainer:{
-        // backgroundColor: 'red',
-        // height: 200,
         alignItems:'center',
         justifyContent: 'center',
     },
