@@ -12,6 +12,7 @@ import PinRegistration from './app/pinRegistration'
 import Login from './app/login'
 import Registration from './app/registration'
 import ChangePassword from './app/changePassword'
+import Home from './app/home'
 
 
 export default class App extends Component {
@@ -27,6 +28,7 @@ export default class App extends Component {
             <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
             <Stack.Screen name="Registration" component={Registration} options={{headerShown: false}} />
             <Stack.Screen name="ChangePassword" component={ChangePassword} options={{headerShown: false}} />
+            <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
           </Stack.Navigator>
         </NavigationContainer>    
       </SafeAreaProvider>

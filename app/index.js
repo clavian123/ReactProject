@@ -130,7 +130,7 @@ class Index extends Component {
                                 <Animated.Text style={{ fontSize: 20 }}>X</Animated.Text>
                             </Animated.View>
                         </TapGestureHandler>
-
+                       
                         <Text style={{ fontSize: 30, marginTop: 50, textAlign: "center", fontWeight: 'bold', color: 'black' }}>Input Your Card Number</Text>
                         <TextInput style={{ ...styles.input, marginTop: 50 }} placeholder="16 digits" maxLength={16} keyboardType='numeric'>
 
@@ -140,6 +140,7 @@ class Index extends Component {
                                 <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>SUBMIT</Text>
                             </Animated.View>
                         </TapGestureHandler>
+       
                     </Animated.View>
                 </KeyboardAvoidingView>
             </SafeAreaView>

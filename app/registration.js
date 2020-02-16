@@ -5,12 +5,20 @@ import SafeAreaView from 'react-native-safe-area-view';
 import { TextInput } from 'react-native-gesture-handler';
 
 class Registration extends Component{
+    constructor(){
+        super();
+        this.submit = () => {
+            const { navigate } = this.props.navigation;
+            navigate('Home');
+        }
+    }
+
     render(){
         return(
             <SafeAreaView style={styles.screen}>
                 <KeyboardAvoidingView behavior="padding">
                     <View style={styles.titleContainer}>
-                        <Text style={styles.title}>Login to Your Account</Text>
+                        <Text style={styles.title}>Create a New Account</Text>
                     </View>
                     <View style={styles.inputContainer}>
                         <TextInput style={styles.input} placeholder="Username" />
@@ -21,7 +29,7 @@ class Registration extends Component{
                     <View style={styles.inputContainer}>
                         <TextInput style={styles.input} placeholder="Confirm Password" />
                     </View>
-                    <TapGestureHandler>
+                    <TapGestureHandler onHandlerStateChange={this.submit}>
                         <View style={{ ...styles.buttonContainer}}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>SUBMIT</Text>
                         </View>
