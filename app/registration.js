@@ -10,7 +10,7 @@ class Registration extends Component{
             <SafeAreaView style={styles.screen}>
                 <KeyboardAvoidingView behavior="padding">
                     <View style={styles.titleContainer}>
-                        <Text style={styles.title}>Login to Your Account</Text>
+                        <Text style={styles.title}>Create New Account</Text>
                     </View>
                     <View style={styles.inputContainer}>
                         <TextInput style={styles.input} placeholder="Username" />
