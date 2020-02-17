@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions, TextInput, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TextInput, KeyboardAvoidingView, ToastAndroid } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 import SafeAreaView from 'react-native-safe-area-view';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
 
 
 const { width, height } = Dimensions.get("window")
@@ -43,11 +41,29 @@ function runTiming(clock, value, dest) {
 class Index extends Component {
     constructor() {
         super()
+
+        this.state={
+            PAN: '',
+        }
+
         this.buttonOpacity = new Value(1)
-        // this.Y = new Value(0)
+    
         this.submit = ()=>{
             const { navigate } = this.props.navigation;
-            navigate('Verification')
+            let { PAN } = this.state;
+            let num = /^[0-9]+$/
+            if(PAN.length != 16){
+                // console.warn('16 digits needed');
+                ToastAndroid.show('Number length must be 16', ToastAndroid.SHORT)
+            }
+            else if(!num.test(PAN)){
+                ToastAndroid.show('Card Number must be Numeric', ToastAndroid.SHORT)
+            }
+            else{
+                navigate('Verification',{
+                    PAN: PAN
+                })
+            }
         }
 
         this.onStateChange = event([
@@ -130,9 +146,9 @@ class Index extends Component {
                                 <Animated.Text style={{ fontSize: 20 }}>X</Animated.Text>
                             </Animated.View>
                         </TapGestureHandler>
-
+                       
                         <Text style={{ fontSize: 30, marginTop: 50, textAlign: "center", fontWeight: 'bold', color: 'black' }}>Input Your Card Number</Text>
-                        <TextInput style={{ ...styles.input, marginTop: 50 }} placeholder="16 digits" maxLength={16} keyboardType='numeric'>
+                        <TextInput style={{ ...styles.input, marginTop: 50 }} placeholder="16 digits" maxLength={16} keyboardType='numeric' onChangeText={(text) => this.setState({PAN: text})}>
 
                         </TextInput>
                         <TapGestureHandler onHandlerStateChange={this.submit}>
@@ -140,6 +156,7 @@ class Index extends Component {
                                 <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>SUBMIT</Text>
                             </Animated.View>
                         </TapGestureHandler>
+       
                     </Animated.View>
                 </KeyboardAvoidingView>
             </SafeAreaView>
