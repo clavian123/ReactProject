@@ -15,11 +15,17 @@ class Login extends Component{
         super();
         this.submit = () => {
             const { navigate } = this.props.navigation;
-            let username = this.state.username
-            ToastAndroid.show(username,ToastAndroid.SHORT)
-            navigate('Home',{
-                username: username
-            });
+            let username = this.state.username;
+            let password = this.state.password;
+            if(username == ''){
+                ToastAndroid.show('Username can not be empty', ToastAndroid.SHORT);
+            }else if(password == ''){
+                ToastAndroid.show('Password can not be empty', ToastAndroid.SHORT);
+            }else{
+                navigate('Home',{
+                    username: username
+                });
+            }   
         }
     }
 

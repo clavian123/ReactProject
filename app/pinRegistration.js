@@ -13,8 +13,8 @@ class PinRegistration extends Component {
                 ToastAndroid.show('PIN can not be empty', ToastAndroid.SHORT);
             }else if(pin.length < 6){
                 ToastAndroid.show('PIN must have 6 characters', ToastAndroid.SHORT);
-            }else if(isNaN(pin)){
-                ToastAndroid.show('PIN must be numeric', ToastAndroid.SHORT);
+            }else if(pin == NaN){
+                ToastAndroid.show('PIN must be numeric', ToastAndroid.SHORT)
             }else{
                 navigate('Registration');
             }

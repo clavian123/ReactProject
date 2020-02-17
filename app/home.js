@@ -20,14 +20,18 @@ class Home extends Component {
         this.logout = () => {
             const { navigate } = this.props.navigation;
             navigate('Index');
-        } 
-        
-        // this.setState({
-        //     username: this.props.route.params.username
-        // })
+        }
     }
 
     render() {
+        const totalPoints = () => {
+            let totalPoints = 0;
+            for (let i = 0; i < this.state.event.length; i++) {
+                totalPoints += this.state.event[i].reward;
+            }
+            return totalPoints;
+        }
+
         const avatarName = (string) => {
             let name = '';
             for (let i = 0; i < string.length; i++) {
@@ -60,6 +64,9 @@ class Home extends Component {
                                 </View>
                             </View>
                         </ImageBackground>
+                    </View>
+                    <View style={styles.totalContainer}>
+                        <Text style={styles.totalText}>Total Points: {totalPoints()} Points</Text>
                     </View>
                     <FlatList
                         keyExtractor={item => item.id}
@@ -126,6 +133,15 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         fontWeight: 'bold',
         fontSize: 18
+    },
+    totalContainer:{
+        marginHorizontal: 10,
+        marginTop: 10
+    },
+    totalText: {
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 17
     }
 });
 
