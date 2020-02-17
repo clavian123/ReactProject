@@ -25,7 +25,6 @@ class Verification extends Component {
 
             if(code.length == 0){
                 ToastAndroid.show("Verficication Code cannot be empty", ToastAndroid.SHORT)
-                
             }
             else if(code.length != 6){
                 ToastAndroid.show('Verification Code must be 6 characters', ToastAndroid.SHORT)
