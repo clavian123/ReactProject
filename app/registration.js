@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, KeyboardAvoidingView, ToastAndroid } from 'react-native';
 import { TapGestureHandler } from 'react-native-gesture-handler';
 import SafeAreaView from 'react-native-safe-area-view';
 import { TextInput } from 'react-native-gesture-handler';
@@ -7,9 +7,36 @@ import { TextInput } from 'react-native-gesture-handler';
 class Registration extends Component{
     constructor(){
         super();
+
+        this.state = {
+            username: '',
+            password: '',
+            confPassword: '',
+        }
+
         this.submit = () => {
             const { navigate } = this.props.navigation;
-            navigate('Home');
+            let username = this.state.username
+            let password = this.state.password
+            let confPassword = this.state.confPassword
+
+            if(confPassword != password){
+                ToastAndroid.show('Confirm password must be the same with Password', ToastAndroid.SHORT)
+            }
+            else if(username.length == 0){
+                ToastAndroid.show('Username cannot be empty', ToastAndroid.SHORT)
+            }
+            else if(password.length == 0){
+                ToastAndroid.show('Password cannot be empty', ToastAndroid.SHORT)
+            }
+            else if(confPassword.length == 0){
+                ToastAndroid.show('Confirm PAssword cannot be empty', ToastAndroid.SHORT)
+            }
+            else{
+                navigate('Home', {
+                    username: username
+                });
+            }
         }
     }
 
@@ -21,13 +48,13 @@ class Registration extends Component{
                         <Text style={styles.title}>Create a New Account</Text>
                     </View>
                     <View style={styles.inputContainer}>
-                        <TextInput style={styles.input} placeholder="Username" />
+                        <TextInput style={styles.input} placeholder="Username" onChangeText={(text) => this.setState({username: text})}/>
                     </View>
                     <View style={styles.inputContainer}>
-                        <TextInput style={styles.input} placeholder="Password" secureTextEntry={true} />
+                        <TextInput style={styles.input} placeholder="Password" secureTextEntry={true} onChangeText={(text) => this.setState({password: text})}/>
                     </View>
                     <View style={styles.inputContainer}>
-                        <TextInput style={styles.input} placeholder="Confirm Password"  secureTextEntry={true}/>
+                        <TextInput style={styles.input} placeholder="Confirm Password"  secureTextEntry={true} onChangeText={(text) => this.setState({confPassword: text})}/>
                     </View>
                     <TapGestureHandler onHandlerStateChange={this.submit}>
                         <View style={{ ...styles.buttonContainer}}>
