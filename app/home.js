@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     },
     imgContainer: {
         width: '100%',
-        height: '35%'
+        height: 150
     },
     imgBg: {
         width: '100%',
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     avatarBg: {
         width: 65,
-        height: '100%',
+        height: 65,
         justifyContent: 'center'
     },
     avatarText: {
