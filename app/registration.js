@@ -16,7 +16,7 @@ class Registration extends Component{
     render(){
         return(
             <SafeAreaView style={styles.screen}>
-                <KeyboardAvoidingView behavior="padding">
+                
                     <View style={styles.titleContainer}>
                         <Text style={styles.title}>Create a New Account</Text>
                     </View>
@@ -24,17 +24,17 @@ class Registration extends Component{
                         <TextInput style={styles.input} placeholder="Username" />
                     </View>
                     <View style={styles.inputContainer}>
-                        <TextInput style={styles.input} placeholder="Password" />
+                        <TextInput style={styles.input} placeholder="Password" secureTextEntry={true} />
                     </View>
                     <View style={styles.inputContainer}>
-                        <TextInput style={styles.input} placeholder="Confirm Password" />
+                        <TextInput style={styles.input} placeholder="Confirm Password"  secureTextEntry={true}/>
                     </View>
                     <TapGestureHandler onHandlerStateChange={this.submit}>
                         <View style={{ ...styles.buttonContainer}}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>SUBMIT</Text>
                         </View>
                     </TapGestureHandler>
-                </KeyboardAvoidingView>
+                
             </SafeAreaView>
         );
     };

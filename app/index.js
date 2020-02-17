@@ -66,6 +66,11 @@ class Index extends Component {
             }
         }
 
+        this.login= ()=>{
+            const { navigate } = this.props.navigation;
+            navigate('Login')
+        }
+
         this.onStateChange = event([
             {
                 nativeEvent: ({ state }) => block([
@@ -131,6 +136,12 @@ class Index extends Component {
                                     <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>REGISTER</Text>
                                 </Animated.View>
                             </TapGestureHandler>
+
+                            <TapGestureHandler onHandlerStateChange={this.login}>
+                                <Animated.View style={{ ...styles.button, opacity: this.buttonOpacity, transform: [{ translateY: this.buttonY }] }}>
+                                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>LOGIN</Text>
+                                </Animated.View>
+                            </TapGestureHandler>
                         </View>
                     </Animated.View>
                     <Animated.View style={{
@@ -184,6 +195,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#b83b5e',
         height: 70,
         marginHorizontal: 20,
+        marginVertical: 10,
         borderRadius: 35,
         alignItems: 'center',
         justifyContent: 'center',

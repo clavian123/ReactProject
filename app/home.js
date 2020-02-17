@@ -17,9 +17,9 @@ class Home extends Component {
 
     constructor(){
         super();
-        this.submit = () => {
+        this.logout = () => {
             const { navigate } = this.props.navigation;
-            navigate('Login');
+            navigate('Index');
         } 
     }
 
@@ -30,7 +30,7 @@ class Home extends Component {
                     <View style={styles.imgContainer}>
                         <ImageBackground style={styles.imgBg} source={Bg}>
                             <View style={styles.logout}>
-                                <Button onPress={this.submit} color="red" title="Log Out"></Button>
+                                <Button onPress={this.logout} color="red" title="Log Out"></Button>
                             </View>
                             <View style={styles.profileContainer}>
                                 <ImageBackground style={styles.avatarBg} imageStyle={{ borderRadius: 40 }} source={AvatarBg}>
