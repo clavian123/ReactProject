@@ -24,10 +24,10 @@ class Registration extends Component{
                         <TextInput style={styles.input} placeholder="Username" />
                     </View>
                     <View style={styles.inputContainer}>
-                        <TextInput style={styles.input} placeholder="Password" />
+                        <TextInput secureTextEntry={true} style={styles.input} placeholder="Password" />
                     </View>
                     <View style={styles.inputContainer}>
-                        <TextInput style={styles.input} placeholder="Confirm Password" />
+                        <TextInput secureTextEntry={true} style={styles.input} placeholder="Confirm Password" />
                     </View>
                     <TapGestureHandler onHandlerStateChange={this.submit}>
                         <View style={{ ...styles.buttonContainer}}>

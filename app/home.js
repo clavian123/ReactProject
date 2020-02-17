@@ -20,10 +20,24 @@ class Home extends Component {
         this.submit = () => {
             const { navigate } = this.props.navigation;
             navigate('Login');
-        } 
+        }
     }
 
     render() {
+        const avatarName = (string) => {
+            let name = '';
+            for (let i = 0; i < string.length; i++) {
+                if(i == 0){
+                    name += string[i];
+                }
+                if(string[i] == ' '){
+                    name += string[i+1];
+                    break;
+                }  
+            }
+            return name;
+        };
+
         return (
             <SafeAreaView style={styles.screen}>
                 <KeyboardAvoidingView>
@@ -34,7 +48,7 @@ class Home extends Component {
                             </View>
                             <View style={styles.profileContainer}>
                                 <ImageBackground style={styles.avatarBg} imageStyle={{ borderRadius: 40 }} source={AvatarBg}>
-                                    <Text style={styles.avatarText}>JC</Text>
+                                    <Text style={styles.avatarText}>{avatarName('Jun Chandra')}</Text>
                                 </ImageBackground>
                                 <View style={styles.nameContainer}>
                                     <Text style={styles.greeting}>Welcome,</Text>

@@ -13,10 +13,10 @@ class ChangePassword extends Component{
                         <Text style={styles.title}>Login to Your Account</Text>
                     </View>
                     <View style={styles.inputContainer}>
-                        <TextInput style={styles.input} placeholder="Password" />
+                        <TextInput secureTextEntry={true} style={styles.input} placeholder="Password" />
                     </View>
                     <View style={styles.inputContainer}>
-                        <TextInput style={styles.input} placeholder="Confirm Password" />
+                        <TextInput secureTextEntry={true} style={styles.input} placeholder="Confirm Password" />
                     </View>
                     <TapGestureHandler>
                         <View style={{ ...styles.buttonContainer}}>

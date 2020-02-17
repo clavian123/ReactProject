@@ -1,17 +1,30 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions, TextInput, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TextInput, KeyboardAvoidingView, Alert, ToastAndroid } from 'react-native';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
-import SafeAreaView from 'react-native-safe-area-view'
-
+import SafeAreaView from 'react-native-safe-area-view';
 
 class PinRegistration extends Component {
     constructor(){
         super();
         this.submit = () =>{
             const { navigate } = this.props.navigation;
-            navigate('Registration');
+            let pin = this.state.pin
+            if(pin == ''){
+                ToastAndroid.show('PIN can not be empty', ToastAndroid.SHORT);
+            }else if(pin.length < 6){
+                ToastAndroid.show('PIN must have 6 characters', ToastAndroid.SHORT);
+            }else if(isNaN(pin)){
+                ToastAndroid.show('PIN must be numeric', ToastAndroid.SHORT);
+            }else{
+                navigate('Registration');
+            }
         }
     }
+
+    state = {
+        pin: ''
+    }
+
     render() {
         return (
             <SafeAreaView style={{ flex: 1, justifyContent: 'center'}}>
@@ -19,7 +32,8 @@ class PinRegistration extends Component {
                     <View style={styles.headerContainer}>
                         <Text style={styles.header}>Please Input Your PIN Number</Text>
                     </View>
-                    <TextInput style={styles.input} keyboardType='numeric' maxLength={6} placeholder="PIN Number"/>
+                    <TextInput secureTextEntry={true} style={styles.input} keyboardType='numeric' maxLength={6} 
+                    placeholder="PIN Number" onChangeText={(text) => this.setState({pin : text})}/>
                     <TapGestureHandler onHandlerStateChange={this.submit}>
                         <View style={{ ...styles.button}}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>SUBMIT</Text>
