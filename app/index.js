@@ -45,7 +45,7 @@ class Index extends Component {
         this.state={
             PAN: '',
         }
-
+        
         this.buttonOpacity = new Value(1)
     
         this.submit = ()=>{

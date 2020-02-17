@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, ImageBackground, Button } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, ImageBackground, Button, ToastAndroid } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Bg from '../image/Bg.jpg';
 import AvatarBg from '../image/AvatarBg.jpg';
@@ -12,7 +12,7 @@ class Home extends Component {
             {title: 'Registration', reward: 10}, 
             {title:'Login', reward: 10}, 
             {title: 'Debit', reward: 15}
-        ]
+        ],
     }
 
     constructor(){
@@ -21,6 +21,10 @@ class Home extends Component {
             const { navigate } = this.props.navigation;
             navigate('Index');
         } 
+        
+        // this.setState({
+        //     username: this.props.route.params.username
+        // })
     }
 
     render() {
@@ -48,11 +52,11 @@ class Home extends Component {
                             </View>
                             <View style={styles.profileContainer}>
                                 <ImageBackground style={styles.avatarBg} imageStyle={{ borderRadius: 40 }} source={AvatarBg}>
-                                    <Text style={styles.avatarText}>{avatarName('Jun Chandra')}</Text>
+                                    <Text style={styles.avatarText}>{avatarName(this.props.route.params.username)}</Text>
                                 </ImageBackground>
                                 <View style={styles.nameContainer}>
                                     <Text style={styles.greeting}>Welcome,</Text>
-                                    <Text style={styles.name}>Jun Chandra</Text>
+                                    <Text style={styles.name}>{this.props.route.params.username}</Text>
                                 </View>
                             </View>
                         </ImageBackground>
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
     },
     imgContainer: {
         width: '100%',
-        height: '35%'
+        height: 150
     },
     imgBg: {
         width: '100%',
@@ -99,7 +103,7 @@ const styles = StyleSheet.create({
     },
     avatarBg: {
         width: 65,
-        height: '100%',
+        height: 65,
         justifyContent: 'center'
     },
     avatarText: {

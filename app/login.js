@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, KeyboardAvoidingView,ToastAndroid } from 'react-native';
 import { TapGestureHandler } from 'react-native-gesture-handler';
 import SafeAreaView from 'react-native-safe-area-view';
 import { TextInput } from 'react-native-gesture-handler';
 
 class Login extends Component{
+
+    state={
+        username:'',
+        password: ''
+    }
+
     constructor(){
         super();
         this.submit = () => {
             const { navigate } = this.props.navigation;
-            navigate('Home');
+            let username = this.state.username
+            ToastAndroid.show(username,ToastAndroid.SHORT)
+            navigate('Home',{
+                username: username
+            });
         }
     }
 
@@ -21,10 +31,10 @@ class Login extends Component{
                         <Text style={styles.title}>Login to Your Account</Text>
                     </View>
                     <View style={styles.inputContainer}>
-                        <TextInput style={styles.input} placeholder="Username" />
+                        <TextInput style={styles.input} placeholder="Username" onChangeText={(text)=>this.setState({username: text})} />
                     </View>
                     <View style={styles.inputContainer}>
-                        <TextInput secureTextEntry={true} style={styles.input} placeholder="Password" />
+                        <TextInput secureTextEntry={true} style={styles.input} placeholder="Password" onChangeText={(text)=> this.setState({password: text})} />
                     </View>
                     <TapGestureHandler onHandlerStateChange={this.submit}>
                         <View style={{ ...styles.buttonContainer}}>
