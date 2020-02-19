@@ -5,22 +5,35 @@ import Bg from '../image/Bg.jpg';
 import AvatarBg from '../image/AvatarBg.jpg';
 import Card from '../components/Card';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import axios from 'axios'
 
 class Home extends Component {
     state = {
         event:[
-            {title: 'Registration', reward: 10}, 
-            {title:'Login', reward: 10}, 
-            {title: 'Debit', reward: 15}
+            // {title: 'Registration', reward: 10}, 
+            // {title:'Login', reward: 10}, 
+            // {title: 'Debit', reward: 15}
         ],
     }
 
     constructor(){
         super();
         this.logout = () => {
-            const { navigate } = this.props.navigation;
-            navigate('Index');
+            this.props.navigation.reset(({
+                index: 0,
+                routes: [{ name: 'Index'}]
+            }));
         }
+        axios.get("http://192.168.43.220/localhost:8080/api/v1/dummyCustomer").then(res => {
+            const data = res.data
+            console.log(data)
+            // for(let i = 0; i < data.length; i++){
+            //     if(data[i].completed == true) {
+            //         this.setState({ event: [...this.state.event, data[i]]})
+            //     }
+            // }
+        })
+        
     }
 
     render() {

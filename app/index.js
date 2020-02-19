@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Dimensions, TextInput, KeyboardAvoidingView, To
 import Animated, { Easing } from 'react-native-reanimated';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 import SafeAreaView from 'react-native-safe-area-view';
-
+import axios from 'axios';
 
 const { width, height } = Dimensions.get("window")
 const { Value, event, block, cond, eq, set, Clock, startClock, stopClock, debug, timing, clockRunning, interpolate, Extrapolate, concat } = Animated
@@ -42,6 +42,7 @@ class Index extends Component {
     constructor() {
         super()
 
+
         this.state={
             PAN: '',
         }
@@ -53,7 +54,6 @@ class Index extends Component {
             let { PAN } = this.state;
             let num = /^[0-9]+$/
             if(PAN.length != 16){
-                // console.warn('16 digits needed');
                 ToastAndroid.show('Number length must be 16', ToastAndroid.SHORT)
             }
             else if(!num.test(PAN)){
@@ -75,7 +75,6 @@ class Index extends Component {
             {
                 nativeEvent: ({ state }) => block([
                     cond(eq(state, State.END), set(this.buttonOpacity, runTiming(new Clock, 1, 0))),
-                    // cond(eq(state, State.END), set(this.Y, runTiming(new Clock, 0, 400))),
                 ])
             }
         ])
@@ -117,6 +116,18 @@ class Index extends Component {
             outputRange: [height / 1.75, 0],
             extrapolate: Extrapolate.CLAMP
         });
+    }
+
+    componentDidMount(){
+        axios.get("https://jsonplaceholder.typicode.com/todos").then(res => {
+            const data = res.data
+            for(let i = 0; i < data.length; i++){
+                if(data[i].completed == true) {
+                    console.log(data[i]);
+                    // console.warn(data[i]);
+                }
+            }
+        })
     }
 
     render() {

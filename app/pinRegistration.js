@@ -30,7 +30,7 @@ class PinRegistration extends Component {
             <SafeAreaView style={{ flex: 1, justifyContent: 'center'}}>
                 <KeyboardAvoidingView behavior="padding">
                     <View style={styles.headerContainer}>
-                        <Text style={styles.header}>Please Input Your PIN Number</Text>
+                        <Text style={styles.header}>Please Input Your ATM PIN Number</Text>
                     </View>
                     <TextInput secureTextEntry={true} style={styles.input} keyboardType='numeric' maxLength={6} 
                     placeholder="PIN Number" onChangeText={(text) => this.setState({pin : text})}/>

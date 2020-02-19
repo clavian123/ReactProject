@@ -30,17 +30,14 @@ class Verification extends Component {
                 ToastAndroid.show('Verification Code must be 6 characters', ToastAndroid.SHORT)
             }
             else if(!num.test(code)){
-                ToastAndroid.show('Verification Code must be numeric', ToastAndroid.SHORT)
+                ToastAndroid.show('Verification Code must be numeric', ToastAndroid.SHORT)  
             }
             else{
-                ToastAndroid.show(this.state.PAN+ " + " + code, ToastAndroid.SHORT)
                 navigate('PinRegistration',{
                     PAN:PAN,
                     verifCode:code
                 })
             }
-            // ToastAndroid.show(this.state.PAN + ' ' + this.state.verifCode, ToastAndroid.SHORT)
-            
         }
     }
     render() {
