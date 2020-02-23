@@ -39,34 +39,59 @@ function runTiming(clock, value, dest) {
 }
 
 class Index extends Component {
+
+    state = {
+        PAN: '',
+        cif_code: ''
+    }
+
     constructor() {
         super()
 
-
-        this.state={
-            PAN: '',
-        }
-        
         this.buttonOpacity = new Value(1)
-    
-        this.submit = ()=>{
-            const { navigate } = this.props.navigation;
-            let { PAN } = this.state;
-            let num = /^[0-9]+$/
-            if(PAN.length != 16){
-                ToastAndroid.show('Number length must be 16', ToastAndroid.SHORT)
+
+        this.submit = ({ nativeEvent }) => {
+
+
+            if (nativeEvent.state === State.END) {
+                const { navigate } = this.props.navigation;
+                let PAN = this.state.PAN;
+                // let cif_code = this.state.cif_code;
+                let num = /^[0-9]+$/
+                console.log(PAN)
+                if (PAN.length != 16) {
+                    ToastAndroid.show('Nomor Kartu anda harus 16 digit', ToastAndroid.SHORT)
+                }
+                else if (!num.test(PAN)) {
+                    ToastAndroid.show('Nomor Kartu anda harus angka', ToastAndroid.SHORT)
+                }
+                else {
+                    axios.post("http://192.168.0.104:8080/checkPan", {
+                        pan: PAN
+                    }).then(res => {
+                        const data = res.data
+                        if (data.cekPan == false) {
+                            console.log(data.cekPan)
+                            ToastAndroid.show("Nomor Kartu tidak terdaftar", ToastAndroid.SHORT)
+                        } else {
+                            this.setState({ cif_code: data.cifCode })
+                            navigate('Verification', {
+                                PAN: PAN,
+                                cif_code: this.state.cif_code
+                            })
+                        }
+                        // console.log(cif_code)
+                    }).catch(function (error) {
+                        console.log(error)
+                        ToastAndroid.show(error.message, ToastAndroid.SHORT)
+                    })
+                }
             }
-            else if(!num.test(PAN)){
-                ToastAndroid.show('Card Number must be Numeric', ToastAndroid.SHORT)
-            }
-            else{
-                navigate('Verification',{
-                    PAN: PAN
-                })
-            }
+
+
         }
 
-        this.login= ()=>{
+        this.login = () => {
             const { navigate } = this.props.navigation;
             navigate('Login')
         }
@@ -118,22 +143,10 @@ class Index extends Component {
         });
     }
 
-    componentDidMount(){
-        axios.get("https://jsonplaceholder.typicode.com/todos").then(res => {
-            const data = res.data
-            for(let i = 0; i < data.length; i++){
-                if(data[i].completed == true) {
-                    console.log(data[i]);
-                    // console.warn(data[i]);
-                }
-            }
-        })
-    }
-
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }}>
-                <KeyboardAvoidingView style={styles.container} behavior="padding" keyboardVerticalOffset={height / 1.565}>
+                <KeyboardAvoidingView style={styles.container} behavior="padding" keyboardVerticalOffset={height / 1.765}>
                     <Animated.View style={{ ...StyleSheet.absoluteFill, transform: [{ translateY: this.bgY }] }}>
                         <View style={{ backgroundColor: '#f08a5d', flex: 1, height: null, width: null, justifyContent: 'center', alignItems: 'center', zIndex: 1 }}>
                             <Animated.View style={{ transform: [{ translateY: this.Y }] }}>
@@ -168,9 +181,9 @@ class Index extends Component {
                                 <Animated.Text style={{ fontSize: 20 }}>X</Animated.Text>
                             </Animated.View>
                         </TapGestureHandler>
-                       
+
                         <Text style={{ fontSize: 30, marginTop: 50, textAlign: "center", fontWeight: 'bold', color: 'black' }}>Input Your Card Number</Text>
-                        <TextInput style={{ ...styles.input, marginTop: 50 }} placeholder="16 digits" maxLength={16} keyboardType='numeric' onChangeText={(text) => this.setState({PAN: text})}>
+                        <TextInput style={{ ...styles.input, marginTop: 50 }} placeholder="16 digits" maxLength={16} keyboardType='numeric' onChangeText={(text) => this.setState({ PAN: text })}>
 
                         </TextInput>
                         <TapGestureHandler onHandlerStateChange={this.submit}>
@@ -178,7 +191,7 @@ class Index extends Component {
                                 <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>SUBMIT</Text>
                             </Animated.View>
                         </TapGestureHandler>
-       
+
                     </Animated.View>
                 </KeyboardAvoidingView>
             </SafeAreaView>
@@ -229,8 +242,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         height: 70,
         borderRadius: 10,
-        borderBottomColor:'#b83b5e',
-        borderBottomWidth:2,
+        borderBottomColor: '#b83b5e',
+        borderBottomWidth: 2,
         marginHorizontal: 20,
         paddingLeft: 10,
         marginVertical: 15,

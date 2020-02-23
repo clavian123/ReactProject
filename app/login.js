@@ -1,49 +1,83 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, KeyboardAvoidingView,ToastAndroid } from 'react-native';
-import { TapGestureHandler } from 'react-native-gesture-handler';
+import { View, Text, StyleSheet, KeyboardAvoidingView, ToastAndroid } from 'react-native';
+import { TapGestureHandler, State } from 'react-native-gesture-handler';
 import SafeAreaView from 'react-native-safe-area-view';
 import { TextInput } from 'react-native-gesture-handler';
+import axios from 'axios'
 
-class Login extends Component{
+class Login extends Component {
 
-    state={
-        username:'',
+    state = {
+        username: '',
         password: ''
     }
 
-    constructor(){
+    // componentDidMount(){
+    //     this.setState({
+    //         username: this.props.route.params.username
+    //     })
+    // }
+
+    constructor() {
         super();
-        this.submit = () => {
-            const { navigate } = this.props.navigation;
-            let username = this.state.username;
-            let password = this.state.password;
-            if(username == ''){
-                ToastAndroid.show('Username can not be empty', ToastAndroid.SHORT);
-            }else if(password == ''){
-                ToastAndroid.show('Password can not be empty', ToastAndroid.SHORT);
-            }else{
-                navigate('Home',{
-                    username: username
-                });
-            }   
+
+
+        this.submit = ({ nativeEvent }) => {
+
+            if (nativeEvent.state == State.END) {
+                const { navigate } = this.props.navigation;
+                let username = this.state.username;
+                let password = this.state.password;
+                let num = /^[0-9a-zA-Z]+$/
+
+                if (username.length == 0) {
+                    ToastAndroid.show('Username harus diisi', ToastAndroid.SHORT);
+                } else if (password.length == 0) {
+                    ToastAndroid.show('Password harus diisi', ToastAndroid.SHORT);
+                } else {
+                    axios.post("http://192.168.0.104:8080/login", {
+                        username: username,
+                        password: password
+                    }).then(res => {
+                        const data = res.data
+                        console.log(data)
+                        if (data.usernameIsValid == false) {
+                            ToastAndroid.show("Username yang anda masukkan tidak valid", ToastAndroid.SHORT)
+                        } 
+                        else {
+                            if(data.loginSuccess == false){
+                                ToastAndroid.show("Password yang anda masukkan tidak valid", ToastAndroid.SHORT)
+                            }
+                            else{
+                                navigate('Home', {
+                                    username: username
+                                })
+                            }
+                        }
+                    }).catch(function (error) {
+                        ToastAndroid.show(error, ToastAndroid.SHORT)
+                    })
+                }
+            }
+
         }
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <SafeAreaView style={styles.screen}>
                 <KeyboardAvoidingView behavior="padding">
                     <View style={styles.titleContainer}>
                         <Text style={styles.title}>Login to Your Account</Text>
                     </View>
                     <View style={styles.inputContainer}>
-                        <TextInput style={styles.input} placeholder="Username" onChangeText={(text)=>this.setState({username: text})} />
+                        <TextInput style={styles.input} placeholder="Username" onChangeText={(text) => this.setState({ username: text })} defaultValue={this.state.username}/>
                     </View>
                     <View style={styles.inputContainer}>
-                        <TextInput secureTextEntry={true} style={styles.input} placeholder="Password" onChangeText={(text)=> this.setState({password: text})} />
+                        <TextInput secureTextEntry={true} style={styles.input} placeholder="Password" onChangeText={(text) => this.setState({ password: text })} />
                     </View>
                     <TapGestureHandler onHandlerStateChange={this.submit}>
-                        <View style={{ ...styles.buttonContainer}}>
+                        <View style={{ ...styles.buttonContainer }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>SUBMIT</Text>
                         </View>
                     </TapGestureHandler>
@@ -62,7 +96,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         // backgroundColor:'red',
         // height: 200,
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
     },
     title: {
@@ -77,7 +111,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2,
         borderBottomColor: '#b83b5e'
     },
-    input:{
+    input: {
         fontSize: 20
     },
     buttonContainer: {

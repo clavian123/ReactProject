@@ -13,8 +13,9 @@ class Card extends Component{
                     <Text style={styles.titleText}>{this.props.title}</Text>
                 </View>
                 <View style={styles.rewardContainer}>
-                    <Text style={styles.rewardText}>{this.props.reward} Points</Text>
+                    <Text style={styles.rewardText}>{this.props.reward}</Text>
                 </View>
+
             </View>
         );
     }
@@ -33,17 +34,18 @@ const styles = StyleSheet.create({
     },
     titleText: {
         color: 'black',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: 20
     },
     rewardContainer: {
         marginHorizontal: 10,
         marginVertical: 5,
-        position: 'absolute',
-        right: 0,
+        // position: 'absolute',
+        // right: 0,
     },
     rewardText: {
         color: 'black',
-        fontSize: 13
+        fontSize: 18
     }
 });
 

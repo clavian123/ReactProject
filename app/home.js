@@ -9,41 +9,43 @@ import axios from 'axios'
 
 class Home extends Component {
     state = {
-        event:[
-            // {title: 'Registration', reward: 10}, 
-            // {title:'Login', reward: 10}, 
-            // {title: 'Debit', reward: 15}
+        voucher:
+        [
+            // {"cifCode: "7397026581", "createdDate": "2020-02-23T00:00:00.000+0000", "expiryDate": "2020-03-23T00:00:00.000+0000", "idUserVoucher": 78, "idVoucher": 1, "loginName": "Jun", "redeemCounter": 0, "redeemDate": null, "status": 1}, 
+            // {"cifCode": "7397026581", "createdDate": "2020-02-23T00:00:00.000+0000", "expiryDate": "2020-03-23T00:00:00.000+0000", "idUserVoucher": 79, "idVoucher": 2, "loginName": "Jun", "redeemCounter": 0, "redeemDate": null, "status": 1}
         ],
+        username: ''
     }
 
     constructor(){
         super();
         this.logout = () => {
+
             this.props.navigation.reset(({
                 index: 0,
                 routes: [{ name: 'Index'}]
             }));
         }
-        axios.get("http://192.168.43.220/localhost:8080/api/v1/dummyCustomer").then(res => {
-            const data = res.data
-            console.log(data)
-            // for(let i = 0; i < data.length; i++){
-            //     if(data[i].completed == true) {
-            //         this.setState({ event: [...this.state.event, data[i]]})
-            //     }
-            // }
-        })
+    }
+
+    componentDidMount(){
         
+        axios.post("http://192.168.0.104:8080/userVoucher", {
+            username: this.props.route.params.username
+        }).then(res => {
+            const data = res.data
+            this.setState({
+                voucher: data
+            })
+            console.log(this.state.voucher);
+
+        }).catch(function (error) {
+            ToastAndroid.show(error, ToastAndroid.SHORT)
+        })
+
     }
 
     render() {
-        const totalPoints = () => {
-            let totalPoints = 0;
-            for (let i = 0; i < this.state.event.length; i++) {
-                totalPoints += this.state.event[i].reward;
-            }
-            return totalPoints;
-        }
 
         const avatarName = (string) => {
             let name = '';
@@ -58,6 +60,7 @@ class Home extends Component {
             }
             return name;
         };
+
 
         return (
             <SafeAreaView style={styles.screen}>
@@ -79,13 +82,13 @@ class Home extends Component {
                         </ImageBackground>
                     </View>
                     <View style={styles.totalContainer}>
-                        <Text style={styles.totalText}>Total Points: {totalPoints()} Points</Text>
+                    <Text style={styles.totalText}>Total Voucher: {this.state.voucher.length} Voucher</Text>
                     </View>
                     <FlatList
                         keyExtractor={item => item.id}
-                        data={this.state.event}
+                        data={this.state.voucher}
                         renderItem={itemData => (
-                            <Card title={itemData.item.title} reward={itemData.item.reward} />
+                            <Card title={itemData.item.voucher.voucherCode} reward={itemData.item.voucher.description} />
                         )}
                     />
                 </KeyboardAvoidingView>
@@ -154,7 +157,7 @@ const styles = StyleSheet.create({
     totalText: {
         color: 'black',
         fontWeight: 'bold',
-        fontSize: 17
+        fontSize: 20
     }
 });
 
