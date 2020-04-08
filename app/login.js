@@ -35,12 +35,11 @@ class Login extends Component {
                 } else if (password.length == 0) {
                     ToastAndroid.show('Password harus diisi', ToastAndroid.SHORT);
                 } else {
-                    axios.post("http://192.168.0.104:8080/login", {
+                    axios.post("http://192.168.43.220:8080/login", {
                         username: username,
                         password: password
                     }).then(res => {
                         const data = res.data
-                        console.log(data)
                         if (data.usernameIsValid == false) {
                             ToastAndroid.show("Username yang anda masukkan tidak valid", ToastAndroid.SHORT)
                         } 
