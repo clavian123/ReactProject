@@ -37,12 +37,11 @@ class ChangePassword extends Component {
                     ToastAndroid.show("Password minimum 8 karakter", ToastAndroid.SHORT)
                 }
                 else {
-                    axios.post("http://192.168.0.104:8080/resetPassword", {
+                    axios.post("http://192.168.43.220:8080/resetPassword", {
                         cif_code: cif_code,
                         password: password
                     }).then(res => {
                         const data = res.data
-                        console.log(data)
                         if (data == false) {
                             ToastAndroid.show("Password yang anda masukkan tidak valid", ToastAndroid.SHORT)
                         } 

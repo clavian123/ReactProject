@@ -56,7 +56,6 @@ class Index extends Component {
             if (nativeEvent.state === State.END) {
                 const { navigate } = this.props.navigation;
                 let PAN = this.state.PAN;
-                // let cif_code = this.state.cif_code;
                 let num = /^[0-9]+$/
                 console.log(PAN)
                 if (PAN.length != 16) {
@@ -66,12 +65,11 @@ class Index extends Component {
                     ToastAndroid.show('Nomor Kartu anda harus angka', ToastAndroid.SHORT)
                 }
                 else {
-                    axios.post("http://192.168.0.104:8080/checkPan", {
+                    axios.post("http://192.168.43.220:8080/checkPan", {
                         pan: PAN
                     }).then(res => {
                         const data = res.data
                         if (data.cekPan == false) {
-                            console.log(data.cekPan)
                             ToastAndroid.show("Nomor Kartu tidak terdaftar", ToastAndroid.SHORT)
                         } else {
                             this.setState({ cif_code: data.cifCode })
@@ -80,7 +78,6 @@ class Index extends Component {
                                 cif_code: this.state.cif_code
                             })
                         }
-                        // console.log(cif_code)
                     }).catch(function (error) {
                         console.log(error)
                         ToastAndroid.show(error.message, ToastAndroid.SHORT)

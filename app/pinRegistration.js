@@ -38,13 +38,12 @@ class PinRegistration extends Component {
                     ToastAndroid.show('PIN must be numeric', ToastAndroid.SHORT)
                 } else {
 
-                    axios.post("http://192.168.0.104:8080/checkPin", {
+                    axios.post("http://192.168.43.220:8080/checkPin", {
                         cif_code: cif_code,
                         pan: pan,
                         pin: pin
                     }).then(res => {
                         const data = res.data
-                        console.log(data.cekPin)
                         if (data.cekPin == false) {
                             ToastAndroid.show("PIN yang anda masukkan tidak valid", ToastAndroid.SHORT)
                         } 
