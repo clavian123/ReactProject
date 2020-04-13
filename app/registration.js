@@ -46,21 +46,16 @@ class Registration extends Component {
                 }
                 else {
 
-                    axios.post("http://192.168.0.104:8080/registration", {
+                    axios.post("http://192.168.43.220:8080/registration", {
                         cif_code: cif_code,
                         username: username,
                         password: password
                     }).then(res => {
                         const data = res.data
-                        console.log(data)
                         if (data == true) {
                             ToastAndroid.show("Username yang anda masukkan sudah digunakan", ToastAndroid.SHORT)
                         } 
                         else {
-
-                            // navigate('Login', {
-                            //     username: username
-                            // })
                             navigate('Home', {
                                 username: username
                             })
@@ -110,8 +105,6 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         marginBottom: 20,
-        // backgroundColor:'red',
-        // height: 200,
         alignItems: 'center',
         justifyContent: 'center',
     },

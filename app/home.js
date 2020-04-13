@@ -30,14 +30,13 @@ class Home extends Component {
 
     componentDidMount(){
         
-        axios.post("http://192.168.0.104:8080/userVoucher", {
+        axios.post("http://192.168.43.220:8080/userVoucher", {
             username: this.props.route.params.username
         }).then(res => {
             const data = res.data
             this.setState({
                 voucher: data
             })
-            console.log(this.state.voucher);
 
         }).catch(function (error) {
             ToastAndroid.show(error, ToastAndroid.SHORT)

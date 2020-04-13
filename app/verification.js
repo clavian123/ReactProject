@@ -43,7 +43,7 @@ class Verification extends Component {
                     ToastAndroid.show('Kode Verifikasi harus angka', ToastAndroid.SHORT)  
                 }
                 else{
-                    axios.post("http://192.168.0.104:8080/checkToken", {
+                    axios.post("http://192.168.43.220:8080/checkToken", {
                         cif_code: cif_code,
                         token: token
                     }).then(res => {
@@ -56,14 +56,11 @@ class Verification extends Component {
                                 cif_code: cif_code
                             })
                         }
-                        console.log(data)
                     }).catch(function (error){
                         console.log(error)
                         ToastAndroid.show(error, ToastAndroid.SHORT)
                     })
                 }
-                console.log(cif_code)
-                console.log(token);
             }
 
             
